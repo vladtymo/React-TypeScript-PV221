@@ -16,7 +16,7 @@ function App() {
           {/* <Route path="login" element={<Login />} /> */}
           <Route path="products" element={<ProductList />} />
           <Route path="products/create" element={<ProductForm />} />
-          {/* <Route path="products/edit/:id" element={<CreateForm />} /> */}
+          <Route path="products/edit/:id" element={<ProductForm />} />
           {/* <Route path="orders" element={<p>Orders</p>} /> */}
           <Route path="*" element={<NoPage />} />
         </Route>

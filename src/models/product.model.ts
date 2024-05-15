@@ -18,3 +18,14 @@ export interface CreateProductModel {
     inStock: boolean;
     description?: string;
 }
+
+export interface EditProductModel {
+    id: number;
+    name: string;
+    imageUrl: string;
+    price: number;
+    discount: number;
+    categoryId: number;
+    inStock: boolean;
+    description?: string;
+}

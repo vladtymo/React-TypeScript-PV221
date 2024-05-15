@@ -4,7 +4,7 @@ import TextArea from 'antd/es/input/TextArea';
 import { ArrowLeftOutlined, UploadOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from "react-router-dom";
 import { CategoryModel } from '../models/category.model';
-import { ProductModel } from '../models/product.model';
+import { EditProductModel, ProductModel } from '../models/product.model';
 import { productsService } from '../services/products.service';
 
 type FieldType = {
@@ -55,15 +55,20 @@ const ProductForm: React.FC = () => {
 
         if (editMode) {
 
-            // // use original values
-            // values.id = product.id;
-            // values.imageUrl = product.imageUrl;
+            // use original values
+            if (product === null) return;
 
-            // const response = await productsService.edit(values);
+            const model: EditProductModel = {
+                ...values,
+                id: product.id,
+                imageUrl: product.imageUrl
+            }
 
-            // if (response.status === 200) {
-            //     message.success(`Product edited successfully!`);
-            // }
+            const response = await productsService.edit(model);
+
+            if (response.status === 200) {
+                message.success(`Product edited successfully!`);
+            }
         }
         else {
             const response = await productsService.create(values);
@@ -187,7 +192,7 @@ const ProductForm: React.FC = () => {
                     getValueFromEvent={normFile}
                     rules={[
                         {
-                            required: true,
+                            required: editMode ? false : true,
                         },
                     ]}
                 >

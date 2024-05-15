@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CreateProductModel, ProductModel } from "../models/product.model";
+import { CreateProductModel, EditProductModel, ProductModel } from "../models/product.model";
 import { CategoryModel } from "../models/category.model";
 
 const api = axios.create({
@@ -33,7 +33,7 @@ export const productsService = {
     delete: function (id: number) {
         return api.delete(`${id}`);
     },
-    edit: function (model: ProductModel) {
+    edit: function (model: EditProductModel) {
         return api.put("", model);
     }
 }
