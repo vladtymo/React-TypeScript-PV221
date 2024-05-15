@@ -102,7 +102,15 @@ const ProductList: React.FC = () => {
     };
 
     return (
-        <Table columns={getColumns(deleteProduct)} dataSource={products} />
+        <>
+            <Button style={createBtn} type="primary">
+                <Link to="create">Create New Product</Link>
+            </Button>
+
+            <Table columns={getColumns(deleteProduct)} dataSource={products}
+                pagination={{ pageSize: 5 }}
+                rowKey="id" />
+        </>
     );
 }
 
@@ -113,4 +121,8 @@ const imageStyles: React.CSSProperties = {
     height: 55,
     objectFit: "cover",
     borderRadius: 6
+}
+
+const createBtn: React.CSSProperties = {
+    marginBottom: 10
 }

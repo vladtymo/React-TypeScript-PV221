@@ -5,6 +5,8 @@ export interface ProductModel {
     price: number;
     discount: number;
     categoryName: string;
+    inStock: boolean;
+    description?: string;
 }
 
 export interface CreateProductModel {
@@ -13,4 +15,6 @@ export interface CreateProductModel {
     price: number;
     discount: number;
     categoryId: number;
+    inStock: boolean;
+    description?: string;
 }

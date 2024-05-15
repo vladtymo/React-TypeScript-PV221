@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import NoPage from './components/NoPage';
 import ProductList from './components/ProductList';
+import ProductForm from './components/ProductForm';
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
           <Route index element={<Home />} />
           {/* <Route path="login" element={<Login />} /> */}
           <Route path="products" element={<ProductList />} />
-          {/* <Route path="products/create" element={<CreateForm />} /> */}
+          <Route path="products/create" element={<ProductForm />} />
           {/* <Route path="products/edit/:id" element={<CreateForm />} /> */}
           {/* <Route path="orders" element={<p>Orders</p>} /> */}
           <Route path="*" element={<NoPage />} />
