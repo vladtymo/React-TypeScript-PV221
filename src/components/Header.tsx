@@ -1,6 +1,7 @@
 import { HomeOutlined, InfoCircleOutlined, ProductOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Layout as LayoutAntd, Menu, MenuProps } from 'antd';
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const { Header: HeaderAntd } = LayoutAntd;
 
@@ -30,13 +31,25 @@ const menuItems: MenuItem[] = [
 ]
 
 const Header: React.FC = () => {
+
+    let location = useLocation();
+    const [current, setCurrent] = useState<string>(location.pathname);
+
+    useEffect(() => {
+        if (location) {
+            if (current !== location.pathname) {
+                setCurrent(location.pathname);
+            }
+        }
+    }, [location, current]);
+
     return (
         <HeaderAntd style={{ display: 'flex', alignItems: 'center' }}>
             <div className="demo-logo" />
             <Menu
                 theme="dark"
                 mode="horizontal"
-                // defaultSelectedKeys={['2']}
+                selectedKeys={[current]}
                 items={menuItems}
                 style={{ flex: 1, minWidth: 0 }}
             />

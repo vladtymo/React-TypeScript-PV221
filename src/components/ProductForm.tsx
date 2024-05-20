@@ -91,6 +91,9 @@ const ProductForm: React.FC = () => {
         // set correct image file
         return e?.file.originFileObj;
     };
+    const normDescription = (e: any) => {
+        return e.target.value == "" ? null : e.target.value;
+    }
 
     return (
         <>
@@ -150,11 +153,6 @@ const ProductForm: React.FC = () => {
                     <Form.Item<FieldType>
                         name="discount"
                         label="Discount"
-                        rules={[
-                            {
-                                required: true,
-                            },
-                        ]}
                         style={{
                             flexGrow: 1
                         }}
@@ -204,6 +202,7 @@ const ProductForm: React.FC = () => {
                 <Form.Item
                     name="description"
                     label="Description"
+                    getValueFromEvent={normDescription}
                     initialValue={null}>
                     <TextArea rows={4}
                         placeholder="Enter product description"
