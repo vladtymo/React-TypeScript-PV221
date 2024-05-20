@@ -6,6 +6,7 @@ import Home from './components/Home';
 import NoPage from './components/NoPage';
 import ProductList from './components/ProductList';
 import ProductForm from './components/ProductForm';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           {/* <Route path="login" element={<Login />} /> */}
+          <Route path="register" element={<Register />} />
           <Route path="products" element={<ProductList />} />
           <Route path="products/create" element={<ProductForm />} />
           <Route path="products/edit/:id" element={<ProductForm />} />

@@ -1,5 +1,5 @@
-import { HomeOutlined, InfoCircleOutlined, ProductOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { Layout as LayoutAntd, Menu, MenuProps } from 'antd';
+import { HomeOutlined, InfoCircleOutlined, LoginOutlined, PlusCircleOutlined, ProductOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { Layout as LayoutAntd, Menu, MenuProps, Space } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -53,6 +53,21 @@ const Header: React.FC = () => {
                 items={menuItems}
                 style={{ flex: 1, minWidth: 0 }}
             />
+
+            <Space size="large">
+                <Link to="/register" style={{ color: "white" }}>
+                    <Space size="small">
+                        <PlusCircleOutlined />
+                        <span>Register</span>
+                    </Space>
+                </Link>
+                <Link to="/login" style={{ color: "white" }}>
+                    <Space size="small">
+                        <LoginOutlined />
+                        <span>Login</span>
+                    </Space>
+                </Link>
+            </Space>
         </HeaderAntd>
     );
 }
