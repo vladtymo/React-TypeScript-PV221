@@ -1,7 +1,8 @@
-import { HomeOutlined, InfoCircleOutlined, LoginOutlined, PlusCircleOutlined, ProductOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { Layout as LayoutAntd, Menu, MenuProps, Space } from 'antd';
+import { HomeOutlined, InfoCircleOutlined, LoginOutlined, LogoutOutlined, PlusCircleOutlined, ProductOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { Layout as LayoutAntd, Menu, MenuProps, Space, message } from 'antd';
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { accountsService } from '../services/accounts.service';
 
 const { Header: HeaderAntd } = LayoutAntd;
 
@@ -43,6 +44,14 @@ const Header: React.FC = () => {
         }
     }, [location, current]);
 
+    const onLogout = async () => {
+        const res = await accountsService.logout();
+
+        if (res && res.status === 200) {
+            message.success(`Your have logged out successfully!`);
+        }
+    }
+
     return (
         <HeaderAntd style={{ display: 'flex', alignItems: 'center' }}>
             <div className="demo-logo" />
@@ -54,20 +63,29 @@ const Header: React.FC = () => {
                 style={{ flex: 1, minWidth: 0 }}
             />
 
-            <Space size="large">
-                <Link to="/register" style={{ color: "white" }}>
-                    <Space size="small">
-                        <PlusCircleOutlined />
-                        <span>Register</span>
+            {
+                true ?
+                    <Space>
+                        <span style={{ color: "white" }}>Hello, {"..."}</span>
+                        <a onClick={onLogout} style={{ color: "white" }}><LogoutOutlined /></a>
                     </Space>
-                </Link>
-                <Link to="/login" style={{ color: "white" }}>
-                    <Space size="small">
-                        <LoginOutlined />
-                        <span>Login</span>
+                    :
+                    <Space size="large">
+                        <Link to="/register" style={{ color: "white" }}>
+                            <Space size="small">
+                                <PlusCircleOutlined />
+                                <span>Register</span>
+                            </Space>
+                        </Link>
+                        <Link to="/login" style={{ color: "white" }}>
+                            <Space size="small">
+                                <LoginOutlined />
+                                <span>Login</span>
+                            </Space>
+                        </Link>
                     </Space>
-                </Link>
-            </Space>
+            }
+
         </HeaderAntd>
     );
 }
