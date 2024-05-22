@@ -7,6 +7,7 @@ import { accountsService } from '../services/accounts.service';
 type FieldType = {
     email: string;
     password: string;
+    confirmPassword: string;
     birthdate: Date;
     phone?: string;
 };
@@ -68,6 +69,27 @@ const Register: React.FC = () => {
                     ]}
                 >
                     <Input.Password placeholder="Enter your password" />
+                </Form.Item>
+
+                <Form.Item<FieldType>
+                    name="confirmPassword"
+                    label="Confirm Password"
+                    dependencies={['password']}
+                    rules={[
+                        {
+                            required: true,
+                        },
+                        ({ getFieldValue }) => ({
+                            validator(_, value) {
+                                if (!value || getFieldValue('password') === value) {
+                                    return Promise.resolve();
+                                }
+                                return Promise.reject(new Error('The new password that you entered do not match!'));
+                            },
+                        }),
+                    ]}
+                >
+                    <Input.Password placeholder="Confirm your password" />
                 </Form.Item>
 
                 <Form.Item<FieldType>
