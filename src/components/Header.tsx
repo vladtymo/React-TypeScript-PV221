@@ -1,8 +1,9 @@
 import { HomeOutlined, InfoCircleOutlined, LoginOutlined, LogoutOutlined, PlusCircleOutlined, ProductOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Layout as LayoutAntd, Menu, MenuProps, Space, message } from 'antd';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { accountsService } from '../services/accounts.service';
+import { AccountContext } from '../contexts/account.context';
 
 const { Header: HeaderAntd } = LayoutAntd;
 
@@ -36,6 +37,8 @@ const Header: React.FC = () => {
     let location = useLocation();
     const [current, setCurrent] = useState<string>(location.pathname);
 
+    const { logout, email, isAuth } = useContext(AccountContext);
+
     useEffect(() => {
         if (location) {
             if (current !== location.pathname) {
@@ -50,6 +53,8 @@ const Header: React.FC = () => {
         if (res && res.status === 200) {
             message.success(`Your have logged out successfully!`);
         }
+
+        logout();
     }
 
     return (
@@ -64,9 +69,9 @@ const Header: React.FC = () => {
             />
 
             {
-                true ?
+                isAuth ?
                     <Space>
-                        <span style={{ color: "white" }}>Hello, {"..."}</span>
+                        <span style={{ color: "white" }}>Hello, {email}</span>
                         <a onClick={onLogout} style={{ color: "white" }}><LogoutOutlined /></a>
                     </Space>
                     :

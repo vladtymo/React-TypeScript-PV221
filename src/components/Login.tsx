@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button, Checkbox, DatePicker, Form, FormProps, Input, InputNumber, Select, SelectProps, Space, Upload, message } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { accountsService } from '../services/accounts.service';
 import { useNavigate } from 'react-router-dom';
 import { tokensService } from '../services/tokens.service';
+import { AccountContext } from '../contexts/account.context';
 
 type FieldType = {
     email: string;
@@ -14,6 +15,8 @@ const Login: React.FC = () => {
 
     const navigate = useNavigate();
     const [form] = Form.useForm();
+
+    const { login } = useContext(AccountContext);
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
 
@@ -29,6 +32,8 @@ const Login: React.FC = () => {
 
                 const payload = tokensService.getAccessTokenPayload();
                 console.log(payload);
+
+                login(payload?.email ?? null);
 
                 // go back
                 navigate(-1);
