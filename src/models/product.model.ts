@@ -22,10 +22,11 @@ export interface CreateProductModel {
 export interface EditProductModel {
     id: number;
     name: string;
-    imageUrl: string;
     price: number;
     discount: number;
     categoryId: number;
     inStock: boolean;
     description?: string;
+    imageUrl: string;
+    newImage?: File;
 }

@@ -61,7 +61,8 @@ const ProductForm: React.FC = () => {
             const model: EditProductModel = {
                 ...values,
                 id: product.id,
-                imageUrl: product.imageUrl
+                imageUrl: product.imageUrl,
+                newImage: values.image
             }
 
             const response = await productsService.edit(model);
@@ -173,6 +174,7 @@ const ProductForm: React.FC = () => {
                     rules={[
                         {
                             required: true,
+                            message: "Product category is required"
                         },
                     ]}
                 >
