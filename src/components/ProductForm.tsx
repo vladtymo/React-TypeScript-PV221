@@ -51,8 +51,6 @@ const ProductForm: React.FC = () => {
     }, []);
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
-        console.log(values);
-
         if (editMode) {
 
             // use original values
