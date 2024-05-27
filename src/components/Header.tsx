@@ -1,9 +1,10 @@
 import { HomeOutlined, InfoCircleOutlined, LoginOutlined, LogoutOutlined, PlusCircleOutlined, ProductOutlined, UnorderedListOutlined } from '@ant-design/icons';
 import { Layout as LayoutAntd, Menu, MenuProps, Space, message } from 'antd';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { accountsService } from '../services/accounts.service';
-import { AccountContext } from '../contexts/account.context';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
+import { logout, selectEmail, selectIsAuth } from '../redux/slices/account.slice';
 
 const { Header: HeaderAntd } = LayoutAntd;
 
@@ -37,7 +38,10 @@ const Header: React.FC = () => {
     let location = useLocation();
     const [current, setCurrent] = useState<string>(location.pathname);
 
-    const { logout, email, isAuth } = useContext(AccountContext);
+    // const { logout, email, isAuth } = useContext(AccountContext);
+    const email = useAppSelector(selectEmail);
+    const isAuth = useAppSelector(selectIsAuth);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if (location) {
@@ -54,7 +58,9 @@ const Header: React.FC = () => {
             message.success(`Your have logged out successfully!`);
         }
 
-        logout();
+        // ----- working with state
+        // logout();
+        dispatch(logout());
     }
 
     return (
@@ -72,7 +78,7 @@ const Header: React.FC = () => {
                 isAuth ?
                     <Space>
                         <span style={{ color: "white" }}>Hello, {email}</span>
-                        <a onClick={onLogout} style={{ color: "white" }}><LogoutOutlined /></a>
+                        <span onClick={onLogout} style={{ color: "white", cursor: "pointer" }}><LogoutOutlined /></span>
                     </Space>
                     :
                     <Space size="large">

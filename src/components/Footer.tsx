@@ -1,4 +1,4 @@
-import { Layout as LayoutAntd, Menu, MenuProps } from 'antd';
+import { Layout as LayoutAntd } from 'antd';
 
 const { Footer: FooterAntd } = LayoutAntd;
 

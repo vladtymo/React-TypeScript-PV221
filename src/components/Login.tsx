@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Button, Checkbox, DatePicker, Form, FormProps, Input, InputNumber, Select, SelectProps, Space, Upload, message } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
+import React, { } from 'react';
+import { Button, Form, FormProps, Input, Space, message } from 'antd';
 import { accountsService } from '../services/accounts.service';
 import { useNavigate } from 'react-router-dom';
 import { tokensService } from '../services/tokens.service';
-import { AccountContext } from '../contexts/account.context';
+import { useAppDispatch } from '../redux/hooks';
+import { login } from '../redux/slices/account.slice';
 
 type FieldType = {
     email: string;
@@ -16,7 +16,8 @@ const Login: React.FC = () => {
     const navigate = useNavigate();
     const [form] = Form.useForm();
 
-    const { login } = useContext(AccountContext);
+    // const { login } = useContext(AccountContext);
+    const dispatch = useAppDispatch();
 
     const onFinish: FormProps<FieldType>['onFinish'] = async (values) => {
 
@@ -31,9 +32,12 @@ const Login: React.FC = () => {
                 tokensService.save(res.data);
 
                 const payload = tokensService.getAccessTokenPayload();
-                console.log(payload);
 
-                login(payload?.email ?? null);
+                if (payload != null) {
+                    // ---- working with state
+                    //login(payload?.email ?? null);
+                    dispatch(login(payload.email));
+                }
 
                 // go back
                 navigate(-1);

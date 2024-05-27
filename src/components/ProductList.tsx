@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Popconfirm, Space, Table, Tag, message } from 'antd';
+import { Button, Popconfirm, Space, Table, message } from 'antd';
 import type { TableProps } from 'antd';
 import { ProductModel } from '../models/product.model';
 import { productsService } from '../services/products.service';

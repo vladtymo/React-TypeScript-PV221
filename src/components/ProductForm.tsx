@@ -3,7 +3,6 @@ import { Button, Checkbox, Form, FormProps, Input, InputNumber, Select, SelectPr
 import TextArea from 'antd/es/input/TextArea';
 import { ArrowLeftOutlined, UploadOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from "react-router-dom";
-import { CategoryModel } from '../models/category.model';
 import { EditProductModel, ProductModel } from '../models/product.model';
 import { productsService } from '../services/products.service';
 
@@ -91,7 +90,7 @@ const ProductForm: React.FC = () => {
         return e?.file.originFileObj;
     };
     const normDescription = (e: any) => {
-        return e.target.value == "" ? null : e.target.value;
+        return e.target.value === "" ? null : e.target.value;
     }
 
     return (
